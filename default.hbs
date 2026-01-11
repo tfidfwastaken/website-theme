@@ -226,8 +226,8 @@
             color: var(--color-accent);
         }
 
-        /* Small caps for first few words after dropcap */
-        .gh-content > p:first-of-type .small-caps-intro {
+        /* Small caps for first line after dropcap - pure CSS, no reflow */
+        .gh-content > p:first-of-type::first-line {
             font-variant: small-caps;
             letter-spacing: 0.05em;
             font-weight: 500;
