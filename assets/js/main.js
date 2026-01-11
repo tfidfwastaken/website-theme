@@ -81,7 +81,8 @@
 
     // Set up event listeners
     document.addEventListener('DOMContentLoaded', function() {
-        initTheme();
+        // Theme is initialized by blocking script in <head> to prevent FOUC
+        // Only need to set up toggle button and small caps here
         initSmallCapsIntro();
         
         const toggleBtn = document.querySelector('.dark-mode-toggle');

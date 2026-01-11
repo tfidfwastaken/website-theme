@@ -2,6 +2,18 @@
 <html lang="{{@site.locale}}">
 <head>
     <meta charset="utf-8">
+    <script>
+        // Blocking script to prevent FOUC - must run before any rendering
+        (function() {
+            var pref = localStorage.getItem('theme-preference');
+            if (pref === 'dark') {
+                document.documentElement.classList.add('dark-mode');
+            } else if (pref === 'light') {
+                document.documentElement.classList.add('light-mode');
+            }
+            // If 'auto' or null, CSS media queries handle it - no class needed
+        })();
+    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{meta_title}}</title>
 
