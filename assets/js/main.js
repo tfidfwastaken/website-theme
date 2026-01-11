@@ -16,7 +16,7 @@
         return 'auto';
     }
 
-    function setTheme(theme) {
+    function setTheme(theme, reload) {
         const html = document.documentElement;
         html.classList.remove('dark-mode', 'light-mode');
         
@@ -28,6 +28,11 @@
         // 'auto' - no class, uses prefers-color-scheme
         
         localStorage.setItem(STORAGE_KEY, theme);
+        
+        // Reload page if there's a comments widget (can't update iframe color scheme dynamically)
+        if (reload && document.querySelector('[data-ghost-comments]')) {
+            location.reload();
+        }
     }
 
     function toggleTheme() {
@@ -35,21 +40,13 @@
         const isDark = current === 'dark' || 
             (current === 'auto' && window.matchMedia('(prefers-color-scheme: dark)').matches);
         
-        setTheme(isDark ? 'light' : 'dark');
-    }
-
-    // Initialize theme on load
-    function initTheme() {
-        const preference = getThemePreference();
-        if (preference !== 'auto') {
-            setTheme(preference);
-        }
+        setTheme(isDark ? 'light' : 'dark', true);
     }
 
     // Set up event listeners
     document.addEventListener('DOMContentLoaded', function() {
         // Theme is initialized by blocking script in <head> to prevent FOUC
-        // Small caps handled by CSS ::first-line - no JS needed
+        // Comments color scheme is set by inline script in post.hbs
         const toggleBtn = document.querySelector('.dark-mode-toggle');
         if (toggleBtn) {
             toggleBtn.addEventListener('click', toggleTheme);

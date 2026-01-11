@@ -36,8 +36,20 @@
 
         {{!-- Comments section --}}
         <section class="post-comments">
-            {{comments mode="auto" title="Comments"}}
+            {{comments title="Comments"}}
         </section>
+        <script>
+            // Set comments color scheme before widget initializes
+            (function() {
+                var pref = localStorage.getItem('theme-preference');
+                var isDark = pref === 'dark' || 
+                    (pref !== 'light' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+                var script = document.querySelector('[data-ghost-comments]');
+                if (script) {
+                    script.setAttribute('data-color-scheme', isDark ? 'dark' : 'light');
+                }
+            })();
+        </script>
 
         <footer class="post-footer">
             {{!-- Navigation to prev/next posts --}}
