@@ -187,8 +187,14 @@
 
         /* Content styling */
         .gh-content {
-            font-size: 1.05rem;
+            font-size: 1.05rem !important;
             line-height: 1.75;
+        }
+
+        /* Ensure post content doesn't inherit larger font-size from code injection */
+        .post-content.gh-content,
+        section.gh-content {
+            font-size: 1.05rem !important;
         }
 
         .gh-content > * + * {
