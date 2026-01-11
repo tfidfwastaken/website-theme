@@ -635,9 +635,24 @@
             }
 
             .post-item {
-                flex-direction: column;
+                flex-direction: row;
+                flex-wrap: wrap;
                 gap: 0.25rem;
-                align-items: flex-start;
+                align-items: baseline;
+            }
+
+            .post-item-star {
+                width: 1rem;
+            }
+
+            .post-item-title {
+                flex: 0 1 auto;
+                max-width: calc(100% - 1.25rem);
+            }
+
+            .post-item-date {
+                width: 100%;
+                padding-left: 1rem;
             }
 
             .post-item-date {
