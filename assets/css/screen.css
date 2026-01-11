@@ -20,8 +20,7 @@
 
 .gh-content th,
 .gh-content td {
-    padding: 0.6rem 1rem 0.6rem 0;
-    text-align: left;
+    padding: 0.3rem 0.5rem 0.3rem 0;
     vertical-align: top;
     border: none;
 }
@@ -42,7 +41,7 @@
 .gh-content thead th {
     font-weight: 600;
     border-bottom: 1.5px solid var(--color-text, #000);
-    padding-bottom: 0.5rem;
+    padding-bottom: 0.25rem;
 }
 
 /* Body rows - clean with no borders */
@@ -60,15 +59,20 @@
     border-bottom: none;
 }
 
-/* Numeric columns should be right-aligned */
-.gh-content td[data-align="right"],
-.gh-content th[data-align="right"] {
-    text-align: right;
+/* Respect markdown table alignment (set via :---, :---:, ---:) */
+.gh-content th[align="left"],
+.gh-content td[align="left"] {
+    text-align: left;
 }
 
-.gh-content td[data-align="center"],
-.gh-content th[data-align="center"] {
+.gh-content th[align="center"],
+.gh-content td[align="center"] {
     text-align: center;
+}
+
+.gh-content th[align="right"],
+.gh-content td[align="right"] {
+    text-align: right;
 }
 
 /* Responsive: allow horizontal scroll on small screens */
@@ -81,7 +85,7 @@
     
     .gh-content th,
     .gh-content td {
-        padding: 0.5rem 0.75rem 0.5rem 0;
+        padding: 0.25rem 0.4rem 0.25rem 0;
         white-space: nowrap;
     }
 }
