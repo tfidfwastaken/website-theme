@@ -21,7 +21,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="{{asset "css/screen.css"}}">
+    <!-- Defer non-critical screen.css - critical styles are inlined above -->
+    <link rel="stylesheet" href="{{asset "css/screen.css"}}" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="{{asset "css/screen.css"}}"></noscript>
 
     <style>
         /* 1. Base light mode colors (default) */
@@ -714,6 +716,18 @@
     </style>
 
     {{ghost_head}}
+    
+    <!-- Defer Ghost's cards.min.css (injected by ghost_head) - only needed for special card embeds -->
+    <script>
+        (function() {
+            var cardsLink = document.querySelector('link[href*="cards.min.css"]');
+            if (cardsLink) {
+                cardsLink.media = 'print';
+                cardsLink.onload = function() { this.media = 'all'; };
+            }
+        })();
+    </script>
+    <noscript><link rel="stylesheet" href="/public/cards.min.css"></noscript>
 </head>
 <body class="{{body_class}}">
     <div class="site-wrapper">
