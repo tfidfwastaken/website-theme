@@ -301,9 +301,150 @@ input, button, textarea, select { font: inherit; }
     }
 }
 
-/* Comments section */
+/* ============================================
+   Comments Section Styling
+   Matches site theme: warm cream (#FAF7ED light, #1f1e1b dark)
+   Font: Newsreader, Black text (#000000)
+   ============================================ */
+
 .post-comments {
     margin-top: 3rem;
     padding-top: 2rem;
     border-top: 1px solid var(--color-border, rgba(0,0,0,0.1));
+}
+
+/* Comments section heading */
+.post-comments h2,
+.post-comments .comments-title {
+    font-family: var(--font-body, 'Newsreader', Georgia, serif);
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--color-text, #000000);
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.01em;
+}
+
+/* Ghost comments iframe container styling */
+.gh-comments,
+[data-ghost-comments] {
+    background-color: var(--color-bg, #FAF7ED);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+/* Comments wrapper - ensure proper spacing */
+.post-comments > * {
+    max-width: 100%;
+}
+
+/* Style the Ghost comments container frame */
+.post-comments iframe {
+    border: none !important;
+    width: 100% !important;
+    min-height: 200px;
+}
+
+/* Comments area visual enhancements */
+.post-comments::before {
+    display: none; /* Remove any pseudo-element decorations if not needed */
+}
+
+/* Fallback styling for comments loading state */
+.post-comments:empty::after {
+    content: 'Loading comments...';
+    display: block;
+    text-align: center;
+    padding: 2rem;
+    color: var(--color-text-secondary, #444);
+    font-family: var(--font-body, 'Newsreader', Georgia, serif);
+    font-style: italic;
+}
+
+/* ============================================
+   Custom CSS Properties for Ghost Comments UI
+   These variables are passed to the comments iframe
+   when Ghost supports CSS custom property inheritance
+   ============================================ */
+
+:root {
+    /* Ghost comments theming variables */
+    --ghost-accent-color: var(--color-accent, #915109);
+    --ghost-comment-bg: var(--color-bg, #FAF7ED);
+    --ghost-comment-text: var(--color-text, #000000);
+    --ghost-comment-border: var(--color-border, rgba(0,0,0,0.1));
+}
+
+/* Dark mode comment variables */
+@media (prefers-color-scheme: dark) {
+    html:not(.light-mode) {
+        --ghost-accent-color: var(--color-accent, #d4a574);
+        --ghost-comment-bg: var(--color-bg, #1f1e1b);
+        --ghost-comment-text: var(--color-text, #e8e6e0);
+        --ghost-comment-border: var(--color-border, rgba(255,255,255,0.1));
+    }
+}
+
+html.dark-mode {
+    --ghost-accent-color: var(--color-accent, #d4a574);
+    --ghost-comment-bg: var(--color-bg, #1f1e1b);
+    --ghost-comment-text: var(--color-text, #e8e6e0);
+    --ghost-comment-border: var(--color-border, rgba(255,255,255,0.1));
+}
+
+html.light-mode {
+    --ghost-accent-color: var(--color-accent, #915109);
+    --ghost-comment-bg: var(--color-bg, #FAF7ED);
+    --ghost-comment-text: var(--color-text, #000000);
+    --ghost-comment-border: var(--color-border, rgba(0,0,0,0.1));
+}
+
+/* ============================================
+   Comments section responsive adjustments
+   ============================================ */
+
+@media (max-width: 600px) {
+    .post-comments {
+        margin-top: 2rem;
+        padding-top: 1.5rem;
+    }
+    
+    .post-comments h2,
+    .post-comments .comments-title {
+        font-size: 1.25rem;
+    }
+}
+
+/* ============================================
+   Sign-in/Sign-up CTA styling within comments
+   These styles target Ghost's default comment CTAs
+   ============================================ */
+
+.post-comments a {
+    color: var(--color-link, #1a5f7a);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 2px;
+    transition: color 0.2s ease;
+}
+
+.post-comments a:hover {
+    color: var(--color-link-hover, #915109);
+}
+
+/* Button styling for comment actions */
+.post-comments button,
+.post-comments .btn {
+    font-family: var(--font-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif);
+    background-color: var(--color-text, #000000);
+    color: var(--color-bg, #FAF7ED);
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+}
+
+.post-comments button:hover,
+.post-comments .btn:hover {
+    opacity: 0.85;
 }
