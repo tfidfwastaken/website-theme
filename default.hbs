@@ -7,7 +7,7 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="{{asset "css/screen.css"}}">
 
@@ -205,12 +205,20 @@
         /* Drop cap */
         .gh-content > p:first-of-type::first-letter {
             float: left;
-            font-size: 3.25rem;
-            line-height: 1;
-            font-weight: 500;
-            margin-right: 0.5rem;
-            margin-top: 0.1rem;
+            font-family: 'IM Fell English', Georgia, serif;
+            font-size: 3.75rem;
+            line-height: 0.85;
+            font-weight: 400;
+            margin-right: 0.1rem;
+            margin-top: 0.15rem;
             color: var(--color-accent);
+        }
+
+        /* Small caps for first few words after dropcap */
+        .gh-content > p:first-of-type .small-caps-intro {
+            font-variant: small-caps;
+            letter-spacing: 0.05em;
+            font-weight: 500;
         }
 
         /* Headings in content */
@@ -411,12 +419,14 @@
             font-size: 1.75rem;
             font-weight: 500;
             margin: 0 0 0.5rem 0;
+            text-align: center;
         }
 
         .tag-description, .author-bio {
             color: var(--color-text-secondary);
             font-size: 1rem;
             margin: 0;
+            text-align: center;
         }
 
         /* Post list (used on home, tag, author, archive) */
