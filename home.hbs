@@ -32,7 +32,7 @@
         {{#get "posts" limit="7" include="tags" as |latestPosts|}}
         <ul class="post-list">
                 {{#foreach latestPosts}}
-                <li class="post-item{{#has tag="unpolished"}} unpolished{{/has}}">
+                <li class="post-item">
                     <span class="post-item-title"><a href="{{url}}">{{title}}</a></span>
                     <span class="post-item-date">{{date format="DD MMM YYYY"}}</span>
                 </li>

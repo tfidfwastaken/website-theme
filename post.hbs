@@ -7,9 +7,7 @@
             <h1 class="post-title">{{title}}</h1>
             <div class="post-meta">
                 <time datetime="{{date format="YYYY-MM-DD"}}">{{date format="DD MMMM YYYY"}}</time>
-                {{#if reading_time}}
-                    <span class="reading-time"> · {{reading_time}}</span>
-                {{/if}}
+
                 {{#has tag="unpolished"}}
                     <span class="unpolished-tag"> · unpolished</span>
                 {{/has}}

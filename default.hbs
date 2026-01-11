@@ -15,8 +15,8 @@
         /* 1. Base light mode colors (default) */
         :root {
             --color-bg: #FAF7ED;
-            --color-text: #2c2c2c;
-            --color-text-secondary: #666;
+            --color-text: #000000;
+            --color-text-secondary: #444;
             --color-accent: #915109;
             --color-border: rgba(0,0,0,0.1);
             --color-link: #1a5f7a;
@@ -55,8 +55,8 @@
         /* 4. Manual light toggle (overrides system dark) */
         html.light-mode {
             --color-bg: #FAF7ED;
-            --color-text: #2c2c2c;
-            --color-text-secondary: #666;
+            --color-text: #000000;
+            --color-text-secondary: #444;
             --color-accent: #915109;
             --color-border: rgba(0,0,0,0.1);
             --color-link: #1a5f7a;
@@ -81,9 +81,10 @@
             line-height: 1.7;
             color: var(--color-text);
             background-color: var(--color-bg);
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
             transition: background-color 0.3s ease, color 0.3s ease;
+            hyphens: auto;
+            -webkit-hyphens: auto;
+            -ms-hyphens: auto;
         }
 
         a {
@@ -182,6 +183,9 @@
         .gh-content {
             font-size: 1.05rem;
             line-height: 1.75;
+            hyphens: auto;
+            -webkit-hyphens: auto;
+            -ms-hyphens: auto;
         }
 
         .gh-content > * + * {
@@ -236,10 +240,8 @@
 
         /* Blockquote */
         .gh-content blockquote {
-            border-left: 3px solid var(--color-accent);
             padding-left: 1.25rem;
             margin: 1.5rem 0;
-            font-style: italic;
             color: var(--color-text-secondary);
         }
 
@@ -425,20 +427,23 @@
             justify-content: space-between;
             align-items: baseline;
             gap: 1rem;
-            padding: 0.5rem 0;
-            padding-left: 1.25rem;
-            position: relative;
+            padding: 0.5rem 0.5rem;
+            border-radius: 4px;
+            transition: background-color 0.15s ease;
         }
 
-        .post-item::before {
-            content: "•";
-            position: absolute;
-            left: 0;
-            color: var(--color-accent);
+        .post-item:hover {
+            background-color: rgba(0,0,0,0.03);
         }
 
-        .post-item.unpolished::before {
-            content: "○";
+        @media (prefers-color-scheme: dark) {
+            html:not(.light-mode) .post-item:hover {
+                background-color: rgba(255,255,255,0.05);
+            }
+        }
+
+        html.dark-mode .post-item:hover {
+            background-color: rgba(255,255,255,0.05);
         }
 
         .post-item-title {
