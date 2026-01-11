@@ -1,0 +1,26 @@
+{{!< default}}
+
+<main class="site-main archive">
+    <header class="archive-header">
+        <h1 class="archive-title">All Posts</h1>
+    </header>
+
+    <ul class="post-list archive-list">
+        {{#foreach posts}}
+        <li class="post-item{{#has tag="unpolished"}} unpolished{{/has}}">
+            <span class="post-item-title"><a href="{{url}}">{{title}}</a></span>
+            <span class="post-item-date">{{date format="DD MMM YYYY"}}</span>
+        </li>
+        {{/foreach}}
+    </ul>
+
+    {{!-- Pagination --}}
+    <nav class="pagination">
+        {{#if pagination.prev}}
+            <a href="{{pagination.prev}}" class="pagination-prev">← Newer</a>
+        {{/if}}
+        {{#if pagination.next}}
+            <a href="{{pagination.next}}" class="pagination-next">Older →</a>
+        {{/if}}
+    </nav>
+</main>

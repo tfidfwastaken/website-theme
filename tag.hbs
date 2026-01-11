@@ -1,0 +1,28 @@
+{{!< default}}
+
+<main class="site-main tag-archive">
+    <header class="tag-header">
+        <h1 class="tag-title">{{tag.name}}</h1>
+        {{#if tag.description}}
+            <p class="tag-description">{{tag.description}}</p>
+        {{/if}}
+    </header>
+
+    <ul class="post-list">
+        {{#foreach posts}}
+        <li class="post-item">
+            <span class="post-item-title"><a href="{{url}}">{{title}}</a></span>
+            <span class="post-item-date">{{date format="DD MMM YYYY"}}</span>
+        </li>
+        {{/foreach}}
+    </ul>
+
+    <nav class="pagination">
+        {{#if pagination.prev}}
+            <a href="{{pagination.prev}}">← Newer</a>
+        {{/if}}
+        {{#if pagination.next}}
+            <a href="{{pagination.next}}">Older →</a>
+        {{/if}}
+    </nav>
+</main>

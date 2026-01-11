@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="{{@site.locale}}">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{meta_title}}</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="{{asset "css/screen.css"}}">
+
+    <style>
+        :root {
+            --color-bg: #fefefe;
+            --color-text: #1a1a1a;
+            --color-text-secondary: #666;
+            --color-border: #e0e0e0;
+            --color-link: #1a1a1a;
+            --color-link-hover: #555;
+            --font-body: 'Newsreader', Georgia, serif;
+            --font-mono: 'SF Mono', Menlo, monospace;
+            --content-width: 38rem;
+            --spacing-unit: 1rem;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root:not(.light-mode) {
+                --color-bg: #1a1a1a;
+                --color-text: #e8e8e8;
+                --color-text-secondary: #999;
+                --color-border: #333;
+                --color-link: #e8e8e8;
+                --color-link-hover: #bbb;
+            }
+        }
+
+        html.dark-mode, :root.dark-mode {
+            --color-bg: #1a1a1a;
+            --color-text: #e8e8e8;
+            --color-text-secondary: #999;
+            --color-border: #333;
+            --color-link: #e8e8e8;
+            --color-link-hover: #bbb;
+        }
+
+        html.light-mode, :root.light-mode {
+            --color-bg: #fefefe;
+            --color-text: #1a1a1a;
+            --color-text-secondary: #666;
+            --color-border: #e0e0e0;
+            --color-link: #1a1a1a;
+            --color-link-hover: #555;
+        }
+
+        /* Override any inline styles from code injection */
+        html.dark-mode body,
+        .dark-mode body {
+            background-color: #1a1a1a !important;
+            color: #e8e8e8 !important;
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
+
+        html {
+            font-size: 18px;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: var(--font-body);
+            font-size: 1rem;
+            line-height: 1.7;
+            color: var(--color-text);
+            background-color: var(--color-bg);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        a {
+            color: var(--color-link);
+            text-decoration: underline;
+            text-decoration-thickness: 1px;
+            text-underline-offset: 2px;
+        }
+
+        a:hover {
+            color: var(--color-link-hover);
+        }
+
+        .site-wrapper {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .site-header {
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .site-header a {
+            text-decoration: none;
+            color: var(--color-text-secondary);
+            transition: color 0.2s ease;
+        }
+
+        .site-header a:hover {
+            color: var(--color-text);
+        }
+
+        .site-header svg {
+            width: 20px;
+            height: 20px;
+            stroke: currentColor;
+            fill: none;
+        }
+
+        .site-main {
+            flex: 1;
+            width: 100%;
+            max-width: var(--content-width);
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .site-footer {
+            padding: 2rem;
+            text-align: center;
+            font-size: 0.85rem;
+            color: var(--color-text-secondary);
+            border-top: 1px solid var(--color-border);
+        }
+
+        .site-footer nav {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .site-footer a {
+            color: var(--color-text-secondary);
+            text-decoration: none;
+        }
+
+        .site-footer a:hover {
+            color: var(--color-text);
+        }
+
+        .dark-mode-toggle {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            color: var(--color-text-secondary);
+            display: flex;
+            align-items: center;
+        }
+
+        .dark-mode-toggle:hover {
+            color: var(--color-text);
+        }
+
+        .dark-mode-toggle svg {
+            width: 18px;
+            height: 18px;
+            stroke: currentColor;
+            fill: none;
+        }
+
+        .dark-mode-toggle .icon-sun {
+            display: none;
+        }
+
+        html.dark-mode .dark-mode-toggle .icon-sun,
+        .dark-mode .dark-mode-toggle .icon-sun {
+            display: block;
+        }
+
+        html.dark-mode .dark-mode-toggle .icon-moon,
+        .dark-mode .dark-mode-toggle .icon-moon {
+            display: none;
+        }
+
+        /* Hide code injection floating button */
+        .theme-switch-button {
+            display: none !important;
+        }
+
+        @media (max-width: 600px) {
+            html {
+                font-size: 16px;
+            }
+
+            .site-header {
+                padding: 1rem 1.5rem;
+            }
+
+            .site-main {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+
+    {{ghost_head}}
+</head>
+<body class="{{body_class}}">
+    <div class="site-wrapper">
+        <header class="site-header">
+            <a href="{{@site.url}}" title="Home">
+                {{> icons/home}}
+            </a>
+            <a href="#/search" title="Search">
+                {{> icons/search}}
+            </a>
+        </header>
+
+        {{{body}}}
+
+        <footer class="site-footer">
+            <nav>
+
+                <a href="#/subscribe">Subscribe</a>
+                <a href="/write-to-me/">Write to me</a>
+                <button class="dark-mode-toggle" aria-label="Toggle dark mode">
+                    <span class="icon-moon">{{> icons/moon}}</span>
+                    <span class="icon-sun">{{> icons/sun}}</span>
+                </button>
+            </nav>
+        </footer>
+    </div>
+
+    <script src="{{asset "js/main.js"}}"></script>
+    {{ghost_foot}}
+</body>
+</html>

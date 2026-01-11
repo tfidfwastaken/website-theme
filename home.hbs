@@ -1,0 +1,60 @@
+{{!< default}}
+
+<main class="site-main home">
+    {{!-- Site Title --}}
+    <header class="home-header">
+        <h1 class="site-title">{{@site.title}}</h1>
+        {{#if @site.description}}
+            <p class="site-description">{{@site.description}}</p>
+        {{/if}}
+    </header>
+
+    {{!-- About Section --}}
+    {{#get "pages" filter="slug:about" limit="1" as |about|}}
+        {{#foreach about}}
+        <section class="home-section about-section">
+            <h2 class="section-title">About</h2>
+            <div class="about-text">
+                {{#if custom_excerpt}}
+                    <p>{{custom_excerpt}}</p>
+                {{else}}
+                    <p>{{excerpt words="25"}}…</p>
+                {{/if}}
+                <a href="{{url}}" class="view-all">Read more →</a>
+            </div>
+        </section>
+        {{/foreach}}
+    {{/get}}
+
+    {{!-- Latest Posts Section --}}
+    <section class="home-section latest-section">
+        <h2 class="section-title">Latest</h2>
+        {{#get "posts" limit="7" include="tags" as |latestPosts|}}
+        <ul class="post-list">
+                {{#foreach latestPosts}}
+                <li class="post-item{{#has tag="unpolished"}} unpolished{{/has}}">
+                    <span class="post-item-title"><a href="{{url}}">{{title}}</a></span>
+                    <span class="post-item-date">{{date format="DD MMM YYYY"}}</span>
+                </li>
+                {{/foreach}}
+        </ul>
+
+        {{/get}}
+    </section>
+
+    {{!-- Featured Posts Section --}}
+    {{#get "posts" filter="featured:true" limit="all" as |featured|}}
+        {{#if featured}}
+        <section class="home-section featured-section">
+            <h2 class="section-title">Featured</h2>
+            <ul class="post-list featured-list">
+                {{#foreach featured}}
+                <li class="post-item featured">
+                    <span class="post-item-title"><a href="{{url}}">{{title}}</a></span>
+                </li>
+                {{/foreach}}
+            </ul>
+        </section>
+        {{/if}}
+    {{/get}}
+</main>

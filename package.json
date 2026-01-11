@@ -1,0 +1,48 @@
+{
+    "name": "atharva-theme",
+    "description": "A minimal typographic theme for Ghost - digital book inspired",
+    "version": "1.0.0",
+    "license": "MIT",
+    "author": {
+        "name": "Atharva Raykar",
+        "email": "raykar.ath@gmail.com"
+    },
+    "engines": {
+        "ghost": ">=5.0.0"
+    },
+    "config": {
+        "posts_per_page": 100,
+        "image_sizes": {
+            "xs": { "width": 160 },
+            "s": { "width": 320 },
+            "m": { "width": 600 },
+            "l": { "width": 960 }
+        },
+        "custom": {
+            "font_body": {
+                "type": "select",
+                "options": ["System serif", "Newsreader", "EB Garamond", "Lora"],
+                "default": "Newsreader",
+                "description": "Font for body text"
+            },
+            "show_reading_time": {
+                "type": "boolean",
+                "default": true,
+                "description": "Show reading time on posts"
+            },
+            "posts_on_homepage": {
+                "type": "select",
+                "options": ["5", "7", "10"],
+                "default": "7",
+                "description": "Number of latest posts on homepage",
+                "group": "homepage"
+            },
+            "show_unpolished_marker": {
+                "type": "boolean",
+                "default": true,
+                "description": "Show marker for unpolished posts",
+                "group": "homepage"
+            }
+        }
+    }
+}
