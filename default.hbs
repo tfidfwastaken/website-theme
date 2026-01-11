@@ -12,8 +12,8 @@
     <link rel="stylesheet" href="{{asset "css/screen.css"}}">
 
     <style>
+        /* 1. Base light mode colors (default) */
         :root {
-            /* Warm cream color palette */
             --color-bg: #FAF7ED;
             --color-text: #2c2c2c;
             --color-text-secondary: #666;
@@ -28,9 +28,9 @@
             --spacing-unit: 1rem;
         }
 
-        /* Dark mode via system preference */
+        /* 2. System dark preference (when no manual override) */
         @media (prefers-color-scheme: dark) {
-            :root:not(.light-mode) {
+            html:not(.light-mode) {
                 --color-bg: #1f1e1b;
                 --color-text: #e8e6e0;
                 --color-text-secondary: #a0a0a0;
@@ -41,33 +41,26 @@
             }
         }
 
-        /* Dark mode via toggle - using high specificity selector */
-        html.dark-mode:root {
-            --color-bg: #1f1e1b !important;
-            --color-text: #e8e6e0 !important;
-            --color-text-secondary: #a0a0a0 !important;
-            --color-accent: #d4a574 !important;
-            --color-border: rgba(255,255,255,0.1) !important;
-            --color-link: #7eb8c9 !important;
-            --color-link-hover: #d4a574 !important;
+        /* 3. Manual dark toggle (explicit preference) */
+        html.dark-mode {
+            --color-bg: #1f1e1b;
+            --color-text: #e8e6e0;
+            --color-text-secondary: #a0a0a0;
+            --color-accent: #d4a574;
+            --color-border: rgba(255,255,255,0.1);
+            --color-link: #7eb8c9;
+            --color-link-hover: #d4a574;
         }
 
-        /* Light mode via toggle - using high specificity selector */
-        html.light-mode:root {
-            --color-bg: #FAF7ED !important;
-            --color-text: #2c2c2c !important;
-            --color-text-secondary: #666 !important;
-            --color-accent: #915109 !important;
-            --color-border: rgba(0,0,0,0.1) !important;
-            --color-link: #1a5f7a !important;
-            --color-link-hover: #915109 !important;
-        }
-
-        /* Explicit body background for dark mode - bypasses cascade issues */
-        html.dark-mode body,
-        html.dark-mode:root body {
-            background-color: #1f1e1b !important;
-            color: #e8e6e0 !important;
+        /* 4. Manual light toggle (overrides system dark) */
+        html.light-mode {
+            --color-bg: #FAF7ED;
+            --color-text: #2c2c2c;
+            --color-text-secondary: #666;
+            --color-accent: #915109;
+            --color-border: rgba(0,0,0,0.1);
+            --color-link: #1a5f7a;
+            --color-link-hover: #915109;
         }
 
         *,
@@ -187,14 +180,8 @@
 
         /* Content styling */
         .gh-content {
-            font-size: 1.05rem !important;
+            font-size: 1.05rem;
             line-height: 1.75;
-        }
-
-        /* Ensure post content doesn't inherit larger font-size from code injection */
-        .post-content.gh-content,
-        section.gh-content {
-            font-size: 1.05rem !important;
         }
 
         .gh-content > * + * {
@@ -384,14 +371,24 @@
             display: none;
         }
 
-        html.dark-mode .dark-mode-toggle .icon-sun,
-        .dark-mode .dark-mode-toggle .icon-sun {
+        /* Show sun icon in dark mode (manual toggle) */
+        html.dark-mode .dark-mode-toggle .icon-sun {
             display: block;
         }
 
-        html.dark-mode .dark-mode-toggle .icon-moon,
-        .dark-mode .dark-mode-toggle .icon-moon {
+        html.dark-mode .dark-mode-toggle .icon-moon {
             display: none;
+        }
+
+        /* Show sun icon when system prefers dark (and no light override) */
+        @media (prefers-color-scheme: dark) {
+            html:not(.light-mode) .dark-mode-toggle .icon-sun {
+                display: block;
+            }
+
+            html:not(.light-mode) .dark-mode-toggle .icon-moon {
+                display: none;
+            }
         }
 
         /* Hide code injection floating button */
@@ -638,7 +635,6 @@
 
         <footer class="site-footer">
             <nav>
-
                 <a href="#/subscribe">Subscribe</a>
                 <a href="/write-to-me/">Write to me</a>
                 <button class="dark-mode-toggle" aria-label="Toggle dark mode">

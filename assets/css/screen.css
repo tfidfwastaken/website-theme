@@ -3,9 +3,7 @@
    Main styles are in default.hbs for performance.
 */
 
-/* Reset */
-*, *::before, *::after { box-sizing: border-box; }
-* { margin: 0; padding: 0; }
+/* Reset - box-sizing is in default.hbs inline styles */
 html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
 img, picture, video, svg { display: block; max-width: 100%; height: auto; }
 input, button, textarea, select { font: inherit; }
