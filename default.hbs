@@ -8,10 +8,10 @@
             var pref = localStorage.getItem('theme-preference');
             if (pref === 'dark') {
                 document.documentElement.classList.add('dark-mode');
-            } else if (pref === 'light') {
+            } else {
+                // Light is the default - add class to override system dark preference
                 document.documentElement.classList.add('light-mode');
             }
-            // If 'auto' or null, CSS media queries handle it - no class needed
         })();
     </script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
