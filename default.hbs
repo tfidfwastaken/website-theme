@@ -240,8 +240,10 @@
 
         /* Blockquote */
         .gh-content blockquote {
+            border-left: 1px solid var(--color-text);
             padding-left: 1.25rem;
             margin: 1.5rem 0;
+            font-size: 0.95em;
             color: var(--color-text-secondary);
         }
 
@@ -423,10 +425,12 @@
         }
 
         .post-item {
+            position: relative;
             display: flex;
             justify-content: space-between;
             align-items: baseline;
             gap: 1rem;
+            cursor: pointer;
             padding: 0.5rem 0.5rem;
             border-radius: 4px;
             transition: background-color 0.15s ease;
@@ -459,6 +463,16 @@
 
         .post-item-title a:hover {
             color: var(--color-link);
+        }
+
+        .post-item-title a::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 1;
         }
 
         .post-item-date {

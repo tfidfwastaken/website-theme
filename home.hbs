@@ -9,27 +9,10 @@
         {{/if}}
     </header>
 
-    {{!-- About Section --}}
-    {{#get "pages" filter="slug:about" limit="1" as |about|}}
-        {{#foreach about}}
-        <section class="home-section about-section">
-            <h2 class="section-title">About</h2>
-            <div class="about-text">
-                {{#if custom_excerpt}}
-                    <p>{{custom_excerpt}}</p>
-                {{else}}
-                    <p>{{excerpt words="25"}}…</p>
-                {{/if}}
-                <a href="{{url}}" class="view-all">Read more →</a>
-            </div>
-        </section>
-        {{/foreach}}
-    {{/get}}
-
     {{!-- Latest Posts Section --}}
     <section class="home-section latest-section">
         <h2 class="section-title">Latest</h2>
-        {{#get "posts" limit="7" include="tags" as |latestPosts|}}
+        {{#get "posts" limit="7" filter="tag:-unpolished" include="tags" as |latestPosts|}}
         <ul class="post-list">
                 {{#foreach latestPosts}}
                 <li class="post-item">
@@ -57,4 +40,26 @@
         </section>
         {{/if}}
     {{/get}}
+
+    {{!-- Unpolished Posts Section --}}
+    {{#get "posts" limit="7" filter="tag:unpolished" as |unpolished|}}
+        {{#if unpolished}}
+        <section class="home-section unpolished-section">
+            <h2 class="section-title">Unpolished</h2>
+            <ul class="post-list">
+                {{#foreach unpolished}}
+                <li class="post-item">
+                    <span class="post-item-title"><a href="{{url}}">{{title}}</a></span>
+                    <span class="post-item-date">{{date format="DD MMM YYYY"}}</span>
+                </li>
+                {{/foreach}}
+            </ul>
+        </section>
+        {{/if}}
+    {{/get}}
+
+    {{!-- About Link --}}
+    <footer class="home-footer">
+        <a href="/about/" class="about-link">About →</a>
+    </footer>
 </main>
