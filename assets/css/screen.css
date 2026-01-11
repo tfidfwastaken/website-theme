@@ -3,6 +3,89 @@
    Main styles are in default.hbs for performance.
 */
 
+/* ============================================
+   Tables - following Butterick's Practical Typography
+   - No cell borders (text creates implied grid)
+   - Generous cell padding for legibility
+   - Subtle header separator only
+   ============================================ */
+
+.gh-content table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+.gh-content th,
+.gh-content td {
+    padding: 0.6rem 1rem 0.6rem 0;
+    text-align: left;
+    vertical-align: top;
+    border: none;
+}
+
+/* First column needs no left padding */
+.gh-content th:first-child,
+.gh-content td:first-child {
+    padding-left: 0;
+}
+
+/* Last column needs no right padding */
+.gh-content th:last-child,
+.gh-content td:last-child {
+    padding-right: 0;
+}
+
+/* Header styling - subtle bottom border only */
+.gh-content thead th {
+    font-weight: 600;
+    border-bottom: 1.5px solid var(--color-text, #000);
+    padding-bottom: 0.5rem;
+}
+
+/* Body rows - clean with no borders */
+.gh-content tbody tr {
+    border: none;
+}
+
+/* Optional: subtle separator between rows for long tables */
+.gh-content tbody td {
+    border-bottom: 1px solid var(--color-border, rgba(0,0,0,0.08));
+}
+
+/* Remove bottom border from last row */
+.gh-content tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* Numeric columns should be right-aligned */
+.gh-content td[data-align="right"],
+.gh-content th[data-align="right"] {
+    text-align: right;
+}
+
+.gh-content td[data-align="center"],
+.gh-content th[data-align="center"] {
+    text-align: center;
+}
+
+/* Responsive: allow horizontal scroll on small screens */
+@media (max-width: 600px) {
+    .gh-content table {
+        display: block;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    .gh-content th,
+    .gh-content td {
+        padding: 0.5rem 0.75rem 0.5rem 0;
+        white-space: nowrap;
+    }
+}
+
 /* Reset - box-sizing is in default.hbs inline styles */
 html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
 img, picture, video, svg { display: block; max-width: 100%; height: auto; }
