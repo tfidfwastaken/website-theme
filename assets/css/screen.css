@@ -507,7 +507,7 @@ html.light-mode {
    ============================================ */
 
 .post-comments a {
-    color: var(--color-link, #1a5f7a);
+    color: var(--color-link, #8b5a2b);
     text-decoration: underline;
     text-decoration-thickness: 1px;
     text-underline-offset: 2px;
