@@ -35,21 +35,33 @@
         </section>
 
         {{!-- Comments section --}}
-        <section class="post-comments">
-            {{comments title="Comments"}}
-        </section>
         <script>
-            // Set comments color scheme before widget initializes
+            // Set comments color scheme BEFORE the widget loads - default to light
             (function() {
                 var pref = localStorage.getItem('theme-preference');
-                var isDark = pref === 'dark' || 
-                    (pref !== 'light' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+                var scheme = pref === 'dark' ? 'dark' : 'light';
+                
+                // Watch for the comments script to be added and set scheme immediately
+                var observer = new MutationObserver(function(mutations) {
+                    var script = document.querySelector('[data-ghost-comments]');
+                    if (script && script.getAttribute('data-color-scheme') !== scheme) {
+                        script.setAttribute('data-color-scheme', scheme);
+                        observer.disconnect();
+                    }
+                });
+                observer.observe(document.documentElement, { childList: true, subtree: true });
+                
+                // Also try immediately in case it's already there
                 var script = document.querySelector('[data-ghost-comments]');
                 if (script) {
-                    script.setAttribute('data-color-scheme', isDark ? 'dark' : 'light');
+                    script.setAttribute('data-color-scheme', scheme);
+                    observer.disconnect();
                 }
             })();
         </script>
+        <section class="post-comments">
+            {{comments title="Comments"}}
+        </section>
 
         <footer class="post-footer">
             {{!-- Navigation to prev/next posts --}}
