@@ -39,14 +39,13 @@
             {{comments title="Comments"}}
         </section>
         <script>
-            // Set comments color scheme before widget initializes
+            // Set comments color scheme - default to light (matches main theme)
             (function() {
                 var pref = localStorage.getItem('theme-preference');
-                var isDark = pref === 'dark' || 
-                    (pref !== 'light' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+                var scheme = pref === 'dark' ? 'dark' : 'light';
                 var script = document.querySelector('[data-ghost-comments]');
                 if (script) {
-                    script.setAttribute('data-color-scheme', isDark ? 'dark' : 'light');
+                    script.setAttribute('data-color-scheme', scheme);
                 }
             })();
         </script>
