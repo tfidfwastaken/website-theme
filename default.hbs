@@ -517,12 +517,25 @@
 
         .post-item-title a {
             color: var(--color-text);
-            text-decoration: none;
-            transition: color 0.2s ease;
+            text-decoration: underline;
+            text-decoration-color: rgba(0,0,0,0.2);
+            text-underline-offset: 3px;
+            transition: color 0.2s ease, text-decoration-color 0.2s ease;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            html:not(.light-mode) .post-item-title a {
+                text-decoration-color: rgba(255,255,255,0.25);
+            }
+        }
+
+        html.dark-mode .post-item-title a {
+            text-decoration-color: rgba(255,255,255,0.25);
         }
 
         .post-item-title a:hover {
             color: var(--color-link);
+            text-decoration-color: var(--color-link);
         }
 
         .post-item-title a::after {
